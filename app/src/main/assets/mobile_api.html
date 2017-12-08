@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"/>
+    <title>Mobile API</title>
+</head>
+
+<body>
+<h3>网址跳转：</h3>
+<input type="url" id="url"/>
+<button type="button" onclick="gotoTestURL()">前往</button>
+
+<h3>DEVICE:</h3>
+<p>
+    <a href="javascript:void(0)" onclick="test4deviceInfo()">device info</a>
+</p>
+<p>
+    <a href="javascript:void(0)" onclick="testAppVersion()">appVersion</a>
+
+</p>
+
+<script type="text/javascript">
+			function gotoTestURL() {
+				var url = document.getElementById("url").value;
+				window.location.href = url;
+			}
+
+			// device module
+			function test4deviceInfo() {
+				var returnValue = window.ApiCore.invokeClientMethod('device', 'deviceInfo', {}, function (result) {
+					console.log('invokeWebMethod ' + 'result : ' + result);
+					alert(result);
+				});
+				//document.getElementById('device-info-returnValue').innerHTML = 'returnValue: ' + JSON.stringify(returnValue);
+			}
+
+			function testAppVersion() {
+							console.log('invokeWebMethod 123');
+				var res = window.ApiCore.invokeClientMethod('device', 'appVersion', {}, function (result) {
+									console.log('invokeWebMethod ' + 'result : ' + result);
+
+				});
+				console.log('invokeWebMethod ' + 'res : ' + res);
+
+			}
+
+			function testAppBuild() {
+				window.ApiCore.invokeClientMethod('device', 'appBuild', {}, function (result) {
+					document.getElementById('app-build').innerHTML = JSON.stringify(result);
+				});
+			}
+
+
+</script>
+</body>
+
+</html>
